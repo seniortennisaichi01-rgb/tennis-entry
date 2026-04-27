@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第22回　近県対抗 山崎喜一郎杯</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap');
+:root{--navy:#1a2a4a;--blue:#2563a8;--blue-l:#4a7fc1;--blue-pale:#dce8f5;--blue-mist:#f0f5fb;--gold:#c8962a;--gold-pale:#fdf3dc;--white:#fff;--off:#f8f9fc;--g100:#f2f3f6;--g200:#e4e6ec;--g400:#9aa0b0;--g600:#616880;--g800:#1e2235;--r:8px;--r-lg:16px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--off);color:var(--g800);min-height:100vh;line-height:1.7;}
+header{background:var(--navy);position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 18px,rgba(255,255,255,.02) 18px,rgba(255,255,255,.02) 20px);}
+.h-inner{max-width:960px;margin:0 auto;padding:2rem 1.5rem 1.75rem;position:relative;z-index:1;}
+.back-btn{position:absolute;top:1.2rem;right:1.5rem;display:inline-flex;align-items:center;gap:.35rem;padding:.42rem .9rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:20px;color:rgba(255,255,255,.85);font-size:.75rem;font-weight:500;text-decoration:none;transition:.15s;z-index:2;}.back-btn:hover{background:rgba(255,255,255,.22);}
+h1{font-family:'Zen Kaku Gothic New',sans-serif;font-size:clamp(1.25rem,3vw,2rem);font-weight:700;color:#fff;letter-spacing:.04em;line-height:1.3;margin-bottom:.3rem;}
+.sub{font-size:.8rem;color:rgba(255,255,255,.5);letter-spacing:.15em;font-weight:300;}
+main{max-width:960px;margin:0 auto;padding:1.75rem 1.25rem 3rem;}
+.notice{background:var(--gold-pale);border:1.5px solid #e8c86a;border-radius:var(--r-lg);padding:1.1rem 1.3rem;margin-bottom:1.5rem;}
+.notice-title{font-size:.82rem;font-weight:700;color:#7a5500;margin-bottom:.4rem;}
+.notice-body{font-size:.83rem;color:#5a3e00;line-height:1.75;}
+.search-wrap{margin-bottom:1.25rem;}
+.search-input{width:100%;padding:.85rem 1.2rem;border:2px solid var(--g200);border-radius:40px;font-size:.92rem;font-family:inherit;color:var(--g800);background:var(--white);outline:none;transition:.2s;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.search-input:focus{border-color:var(--blue-l);box-shadow:0 2px 16px rgba(37,99,168,.12);}
+.filter-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.35rem;}
+.fchip{padding:.42rem 1rem;border-radius:20px;border:1.5px solid var(--g200);background:var(--white);font-size:.78rem;font-weight:700;color:var(--g600);cursor:pointer;transition:.15s;font-family:inherit;}
+.fchip:hover{border-color:var(--blue-l);color:var(--blue);}
+.fchip.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+.pairs{display:flex;flex-direction:column;gap:.65rem;}
+.pair-card{background:var(--white);border-radius:var(--r-lg);box-shadow:0 2px 10px rgba(26,42,74,.07);overflow:hidden;border-left:4px solid var(--blue-l);display:flex;align-items:center;padding:.9rem 1.2rem;gap:1.1rem;transition:.15s;}
+.pair-card:hover{box-shadow:0 4px 18px rgba(26,42,74,.13);transform:translateX(2px);}
+.pair-cat{flex-shrink:0;background:var(--blue-pale);color:#1a3a6a;font-size:.66rem;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+.pair-ids{flex-shrink:0;text-align:right;min-width:50px;}
+.pair-ids span{display:block;font-size:.71rem;color:var(--g400);line-height:1.5;}
+.pair-names{flex:1;}
+.pair-names .p1,.pair-names .p2{font-size:.96rem;font-weight:700;color:var(--navy);line-height:1.45;}
+.pair-belong{flex-shrink:0;font-size:.71rem;color:var(--g600);text-align:right;max-width:130px;line-height:1.5;}
+.empty{text-align:center;padding:3rem;color:var(--g400);font-size:.88rem;}
+footer{text-align:center;font-size:.72rem;color:var(--g400);padding:1.5rem 1rem;border-top:1px solid var(--g200);}
+@media(max-width:580px){.pair-belong,.pair-ids{display:none;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="h-inner">
+    <a class="back-btn" href="https://sites.google.com/view/senior-tennis-aichi-pref/%E5%A4%A7%E4%BC%9A%E9%96%8B%E5%82%AC%E6%A1%88%E5%86%85">← 大会 開催案内へ戻る</a>
+    <h1>第22回　近県対抗 山崎喜一郎杯</h1>
+    <p class="sub">OFFICIAL ENTRY LIST</p>
+  </div>
+</header>
+<main>
+  
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="searchInput" placeholder="名前・所属・番号で探す..." oninput="doFilter()">
+  </div>
+  <div class="filter-row" id="filterRow"></div>
+  <div class="pairs" id="pairList"></div>
+</main>
+<footer>シニアテニス連盟愛知県部会 ／ 第22回　近県対抗 山崎喜一郎杯</footer>
+<script>
+const PAIRS=[{"cat":"Ａ女子120歳以上","id1":30101,"n1":"河村  圭子","b1":"","id2":30100,"n2":"下村 富士美","b2":""},{"cat":"Ａ女子120歳以上","id1":30254,"n1":"柴田 典子","b1":"","id2":30247,"n2":"山田 美樹子","b2":""},{"cat":"Ａ女子120歳以上","id1":27468,"n1":"瀬木 伸子","b1":"","id2":27768,"n2":"高橋 初美","b2":"<幸田ＬＴＣ>"},{"cat":"Ａ女子120歳以上","id1":30141,"n1":"長坂 晶子","b1":"","id2":30140,"n2":"丹羽 裕子","b2":""},{"cat":"Ａ女子120歳以上","id1":27857,"n1":"秋山 敦子","b1":"","id2":30239,"n2":"松並 佳子","b2":""},{"cat":"Ａ女子120歳以上","id1":26756,"n1":"間藤 弥生","b1":"<strawberry>","id2":26769,"n2":"堀田 玲子","b2":"<strawberry>"},{"cat":"Ａ女子120歳以上","id1":26964,"n1":"伊藤 由美","b1":"<東石ﾃﾆｽｸﾗﾌﾞ>","id2":26873,"n2":"長沼 恵久子","b2":"<ﾁｪﾘｰﾃﾆｽｸﾗﾌﾞ>"},{"cat":"Ａ女子120歳以上","id1":29600,"n1":"後藤 七海","b1":"","id2":29696,"n2":"植木 眞智美","b2":"<尾張旭市ﾃﾆｽ連盟>"},{"cat":"Ｃ男子130歳以上","id1":26194,"n1":"由谷 正巳","b1":"<名古屋テニス協会>","id2":29624,"n2":"下林 直人","b2":""},{"cat":"Ｃ男子130歳以上","id1":28613,"n1":"松尾 孝也","b1":"","id2":29388,"n2":"中村 温利","b2":""},{"cat":"Ｃ男子130歳以上","id1":27810,"n1":"田中 富士雄","b1":"<ﾌﾚｰﾑｼｮｯﾄ>","id2":26105,"n2":"石川 隆雄","b2":""},{"cat":"Ｃ男子130歳以上","id1":21825,"n1":"小木 卓也","b1":"<ARK47>","id2":27177,"n2":"松原 文善","b2":"<木曽川LTCﾞ>"},{"cat":"Ｃ男子130歳以上","id1":28243,"n1":"脇田 芳徳","b1":"<名古屋ﾛｰﾝﾃﾆｽ>","id2":28180,"n2":"竹内 厚人","b2":""},{"cat":"Ｂ女子135歳以上","id1":23201,"n1":"加藤 敬子","b1":"<ｼﾞｰｸ>","id2":27714,"n2":"小林 久子","b2":"<ジーフ>"},{"cat":"Ｂ女子135歳以上","id1":26179,"n1":"大亀 志津子","b1":"","id2":9031,"n2":"寺本 協子","b2":"<名古屋L.T.C.>"},{"cat":"Ｂ女子135歳以上","id1":11430,"n1":"伊藤 由美子","b1":"<USLT.C.>","id2":12374,"n2":"田村 千代子","b2":"<名古屋L.T.C.>"},{"cat":"Ｂ女子135歳以上","id1":26578,"n1":"立川 千歌","b1":"","id2":30142,"n2":"小山 和子","b2":""},{"cat":"Ｂ女子135歳以上","id1":14955,"n1":"立松 美津枝","b1":"<名古屋L.T.C.>","id2":27119,"n2":"房崎 律子","b2":"<森林ﾛﾝｸﾞｳｯﾄﾞ>"},{"cat":"Ｂ女子135歳以上","id1":23047,"n1":"小林 早苗","b1":"","id2":23848,"n2":"青山  世津子","b2":""},{"cat":"Ｂ女子135歳以上","id1":29484,"n1":"小林 久美子","b1":"","id2":20578,"n2":"田之上 加代子","b2":"<東三河>"},{"cat":"Ｂ女子135歳以上","id1":23028,"n1":"佐次本 栄子","b1":"<チームＳＫＫ>","id2":22994,"n2":"岩下 加世子","b2":"<チームＳＫＫ>"},{"cat":"Ｂ女子135歳以上","id1":26835,"n1":"水野 奈緒美","b1":"","id2":22307,"n2":"鵜飼 好美","b2":"<ＢＲＡＶＯ>"},{"cat":"Ｂ女子135歳以上","id1":16554,"n1":"楠本 佳子","b1":"<ﾜﾝﾀﾞｰＧ>","id2":24987,"n2":"今井 佐知子","b2":""},{"cat":"Ｂ女子135歳以上","id1":19748,"n1":"岡部 悦子","b1":"","id2":19181,"n2":"今田 治代","b2":""},{"cat":"Ｂ女子135歳以上","id1":10072,"n1":"中野 和子","b1":"<オリーブ>","id2":21690,"n2":"近藤 澄江","b2":"<オリーブ.>"},{"cat":"Ｂ女子135歳以上","id1":29311,"n1":"武市 由美子","b1":"<三和ﾃﾆｽ>副登録","id2":29448,"n2":"渡辺 奈緒美","b2":""},{"cat":"Ｂ女子135歳以上","id1":22416,"n1":"大井川 美鈴","b1":"<ワンダーＧ>","id2":6994,"n2":"6994","b2":""},{"cat":"D男子155歳以上","id1":20968,"n1":"古庄 敏朗","b1":"<東海郵政>","id2":15545,"n2":"近藤 英俊","b2":"<名古屋L.T.C.>"},{"cat":"D男子155歳以上","id1":21473,"n1":"柳沼 平八","b1":"<青山ｸﾗﾌﾞ>","id2":25032,"n2":"豊田   伸","b2":"<瀬戸庭球倶楽部>"},{"cat":"D男子155歳以上","id1":26418,"n1":"伊藤 立三","b1":"","id2":26417,"n2":"小林 富夫","b2":""},{"cat":"D男子155歳以上","id1":28607,"n1":"伊藤 壽記","b1":"","id2":29703,"n2":"檜垣 一喜","b2":""},{"cat":"Ｅミックスダブルス140歳以上","id1":28407,"n1":"中野 弘文","b1":"","id2":30206,"n2":"中野 美枝子","b2":""},{"cat":"Ｅミックスダブルス140歳以上","id1":28582,"n1":"安田 稔","b1":"<ﾌﾞﾗﾝﾀﾞーｽﾃﾆｽ＞","id2":28662,"n2":"中野 真知子","b2":""},{"cat":"Ｅミックスダブルス140歳以上","id1":18316,"n1":"杉浦 利男","b1":"<ﾌﾞﾙｰｽｶｲ>","id2":23026,"n2":"半谷 摩利子","b2":""},{"cat":"Ｅミックスダブルス140歳以上","id1":28498,"n1":"奥村 幸年","b1":"","id2":28511,"n2":"伊澤 和加代","b2":"<OZONO>"}];
+const CATS=["Ａ女子120歳以上","Ｃ男子130歳以上","Ｂ女子135歳以上","D男子155歳以上","Ｅミックスダブルス140歳以上"];
+let activeCat='all',searchQ='';
+function init(){
+  const row=document.getElementById('filterRow');
+  row.innerHTML=[{label:'すべて',val:'all'},...CATS.map(c=>({label:c,val:c}))].map(c=>
+    `<button class="fchip${c.val==='all'?' active':''}" onclick="setCat('${c.val.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}')">${c.label}</button>`
+  ).join('');
+  render();
+}
+function setCat(c){
+  activeCat=c;
+  document.querySelectorAll('.fchip').forEach(el=>el.classList.toggle('active',el.textContent.trim()===(c==='all'?'すべて':c)));
+  render();
+}
+function doFilter(){searchQ=document.getElementById('searchInput').value.toLowerCase();render();}
+function render(){
+  const filtered=PAIRS.filter(p=>{
+    if(activeCat!=='all'&&p.cat!==activeCat)return false;
+    if(!searchQ)return true;
+    return[p.n1,p.n2,p.b1,p.b2,String(p.id1),String(p.id2)].some(v=>v&&v.toLowerCase().includes(searchQ));
+  });
+  const list=document.getElementById('pairList');
+  if(!filtered.length){list.innerHTML='<div class="empty">該当する選手が見つかりません</div>';return;}
+  list.innerHTML=filtered.map(p=>`
+    <div class="pair-card">
+      <span class="pair-cat">${p.cat}</span>
+      <div class="pair-ids"><span>${p.id1}</span><span>${p.id2||''}</span></div>
+      <div class="pair-names"><div class="p1">${p.n1}</div>${p.n2?'<div class="p2">'+p.n2+'</div>':''}</div>
+      <div class="pair-belong"><div>${p.b1||''}</div>${p.b2?'<div>'+p.b2+'</div>':''}</div>
+    </div>`).join('');
+}
+init();
+</script>
+</body>
+</html>
