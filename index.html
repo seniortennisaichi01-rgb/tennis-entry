@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>第22回 近県対抗 山崎喜一郎杯</title>
+<title>第17回　合計年齢別　愛知県予選大会</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap');
 :root{--navy:#1a2a4a;--blue:#2563a8;--blue-l:#4a7fc1;--blue-pale:#dce8f5;--blue-mist:#f0f5fb;--gold:#c8962a;--gold-pale:#fdf3dc;--white:#fff;--off:#f8f9fc;--g100:#f2f3f6;--g200:#e4e6ec;--g400:#9aa0b0;--g600:#616880;--g800:#1e2235;--r:8px;--r-lg:16px;}
@@ -26,6 +26,10 @@ main{max-width:960px;margin:0 auto;padding:1.75rem 1.25rem 3rem;}
 .fchip{padding:.42rem 1rem;border-radius:20px;border:1.5px solid var(--g200);background:var(--white);font-size:.78rem;font-weight:700;color:var(--g600);cursor:pointer;transition:.15s;font-family:inherit;}
 .fchip:hover{border-color:var(--blue-l);color:var(--blue);}
 .fchip.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+.tab-bar{display:flex;gap:.4rem;margin-bottom:1.25rem;border-bottom:2px solid var(--g200);}
+.tab-btn{padding:.6rem 1.4rem;font-size:.92rem;font-weight:700;color:var(--g600);background:transparent;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;cursor:pointer;font-family:inherit;transition:.15s;}
+.tab-btn:hover{color:var(--blue);}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue);}
 .pairs{display:flex;flex-direction:column;gap:.65rem;}
 .pair-card{background:var(--white);border-radius:var(--r-lg);box-shadow:0 2px 10px rgba(26,42,74,.07);overflow:hidden;border-left:4px solid var(--blue-l);display:flex;align-items:center;padding:.9rem 1.2rem;gap:1.1rem;transition:.15s;}
 .pair-card:hover{box-shadow:0 4px 18px rgba(26,42,74,.13);transform:translateX(2px);}
@@ -44,38 +48,68 @@ footer{text-align:center;font-size:.72rem;color:var(--g400);padding:1.5rem 1rem;
 <header>
   <div class="h-inner">
     <a class="back-btn" href="https://sites.google.com/view/senior-tennis-aichi-pref/%E5%A4%A7%E4%BC%9A%E9%96%8B%E5%82%AC%E6%A1%88%E5%86%85">← 大会 開催案内へ戻る</a>
-    <h1>第22回 近県対抗 山崎喜一郎杯</h1>
+    <h1>第17回　合計年齢別　愛知県予選大会</h1>
     <p class="sub">OFFICIAL ENTRY LIST</p>
   </div>
 </header>
 <main>
-  
+  <div class="notice"><div class="notice-title">⚠️ 参加者の皆様へのお知らせ</div><div class="notice-body">対戦組み合わせは当日発表となります。</div></div>
+  <div class="tab-bar" id="tabBar"></div>
   <div class="search-wrap">
     <input class="search-input" type="text" id="searchInput" placeholder="名前・所属・番号で探す..." oninput="doFilter()">
   </div>
   <div class="filter-row" id="filterRow"></div>
   <div class="pairs" id="pairList"></div>
 </main>
-<footer>シニアテニス連盟愛知県部会 ／ 第22回 近県対抗 山崎喜一郎杯</footer>
+<footer>シニアテニス連盟愛知県部会 ／ 第17回　合計年齢別　愛知県予選大会</footer>
 <script>
-const PAIRS=[{"cat":"Ａ女子120歳以上","id1":30101,"n1":"河村  圭子","b1":"","id2":30100,"n2":"下村 富士美","b2":""},{"cat":"Ａ女子120歳以上","id1":30254,"n1":"柴田 典子","b1":"","id2":30247,"n2":"山田 美樹子","b2":""},{"cat":"Ａ女子120歳以上","id1":27468,"n1":"瀬木 伸子","b1":"","id2":27768,"n2":"高橋 初美","b2":"<幸田ＬＴＣ>"},{"cat":"Ａ女子120歳以上","id1":30141,"n1":"長坂 晶子","b1":"","id2":30140,"n2":"丹羽 裕子","b2":""},{"cat":"Ａ女子120歳以上","id1":27857,"n1":"秋山 敦子","b1":"","id2":30239,"n2":"松並 佳子","b2":""},{"cat":"Ａ女子120歳以上","id1":26756,"n1":"間藤 弥生","b1":"<strawberry>","id2":26769,"n2":"堀田 玲子","b2":"<strawberry>"},{"cat":"Ａ女子120歳以上","id1":26964,"n1":"伊藤 由美","b1":"<東石ﾃﾆｽｸﾗﾌﾞ>","id2":26873,"n2":"長沼 恵久子","b2":"<ﾁｪﾘｰﾃﾆｽｸﾗﾌﾞ>"},{"cat":"Ａ女子120歳以上","id1":29600,"n1":"後藤 七海","b1":"","id2":29696,"n2":"植木 眞智美","b2":"<尾張旭市ﾃﾆｽ連盟>"},{"cat":"Ｃ男子130歳以上","id1":26194,"n1":"由谷 正巳","b1":"<名古屋テニス協会>","id2":29624,"n2":"下林 直人","b2":""},{"cat":"Ｃ男子130歳以上","id1":28613,"n1":"松尾 孝也","b1":"","id2":29388,"n2":"中村 温利","b2":""},{"cat":"Ｃ男子130歳以上","id1":27810,"n1":"田中 富士雄","b1":"<ﾌﾚｰﾑｼｮｯﾄ>","id2":26105,"n2":"石川 隆雄","b2":""},{"cat":"Ｃ男子130歳以上","id1":21825,"n1":"小木 卓也","b1":"<ARK47>","id2":27177,"n2":"松原 文善","b2":"<木曽川LTCﾞ>"},{"cat":"Ｃ男子130歳以上","id1":28243,"n1":"脇田 芳徳","b1":"<名古屋ﾛｰﾝﾃﾆｽ>","id2":28180,"n2":"竹内 厚人","b2":""},{"cat":"Ｃ男子130歳以上","id1":29178,"n1":"加藤 滋記","b1":"<木曽川LTCﾞ>","id2":29798,"n2":"山田 浩三","b2":"<木曽川LTCﾞ>"},{"cat":"Ｂ女子135歳以上","id1":23201,"n1":"加藤 敬子","b1":"<ｼﾞｰｸ>","id2":27714,"n2":"小林 久子","b2":"<ジーフ>"},{"cat":"Ｂ女子135歳以上","id1":26179,"n1":"大亀 志津子","b1":"","id2":9031,"n2":"寺本 協子","b2":"<名古屋L.T.C.>"},{"cat":"Ｂ女子135歳以上","id1":11430,"n1":"伊藤 由美子","b1":"<USLT.C.>","id2":12374,"n2":"田村 千代子","b2":"<名古屋L.T.C.>"},{"cat":"Ｂ女子135歳以上","id1":26578,"n1":"立川 千歌","b1":"","id2":30142,"n2":"小山 和子","b2":""},{"cat":"Ｂ女子135歳以上","id1":14955,"n1":"立松 美津枝","b1":"<名古屋L.T.C.>","id2":27119,"n2":"房崎 律子","b2":"<森林ﾛﾝｸﾞｳｯﾄﾞ>"},{"cat":"Ｂ女子135歳以上","id1":23047,"n1":"小林 早苗","b1":"","id2":23848,"n2":"青山  世津子","b2":""},{"cat":"Ｂ女子135歳以上","id1":29484,"n1":"小林 久美子","b1":"","id2":20578,"n2":"田之上 加代子","b2":"<東三河>"},{"cat":"Ｂ女子135歳以上","id1":23028,"n1":"佐次本 栄子","b1":"<チームＳＫＫ>","id2":22994,"n2":"岩下 加世子","b2":"<チームＳＫＫ>"},{"cat":"Ｂ女子135歳以上","id1":26835,"n1":"水野 奈緒美","b1":"","id2":22307,"n2":"鵜飼 好美","b2":"<ＢＲＡＶＯ>"},{"cat":"Ｂ女子135歳以上","id1":16554,"n1":"楠本 佳子","b1":"<ﾜﾝﾀﾞｰＧ>","id2":24987,"n2":"今井 佐知子","b2":""},{"cat":"Ｂ女子135歳以上","id1":19748,"n1":"岡部 悦子","b1":"","id2":19181,"n2":"今田 治代","b2":""},{"cat":"Ｂ女子135歳以上","id1":10072,"n1":"中野 和子","b1":"<オリーブ>","id2":21690,"n2":"近藤 澄江","b2":"<オリーブ.>"},{"cat":"Ｂ女子135歳以上","id1":29311,"n1":"武市 由美子","b1":"<三和ﾃﾆｽ>副登録","id2":29448,"n2":"渡辺 奈緒美","b2":""},{"cat":"Ｂ女子135歳以上","id1":22416,"n1":"大井川 美鈴","b1":"<ワンダーＧ>","id2":6794,"n2":"吉次 孝子","b2":"<ｱﾝﾄﾞﾛﾒﾀﾞ>"},{"cat":"D男子155歳以上","id1":20968,"n1":"古庄 敏朗","b1":"<東海郵政>","id2":15545,"n2":"近藤 英俊","b2":"<名古屋L.T.C.>"},{"cat":"D男子155歳以上","id1":21473,"n1":"柳沼 平八","b1":"<青山ｸﾗﾌﾞ>","id2":25032,"n2":"豊田   伸","b2":"<瀬戸庭球倶楽部>"},{"cat":"D男子155歳以上","id1":26418,"n1":"伊藤 立三","b1":"","id2":26417,"n2":"小林 富夫","b2":""},{"cat":"D男子155歳以上","id1":28607,"n1":"伊藤 壽記","b1":"","id2":29703,"n2":"檜垣 一喜","b2":""},{"cat":"Ｅミックスダブルス140歳以上","id1":28407,"n1":"中野 弘文","b1":"","id2":30206,"n2":"中野 美枝子","b2":""},{"cat":"Ｅミックスダブルス140歳以上","id1":28582,"n1":"安田 稔","b1":"<ﾌﾞﾗﾝﾀﾞーｽﾃﾆｽ＞","id2":28662,"n2":"中野 真知子","b2":""},{"cat":"Ｅミックスダブルス140歳以上","id1":18316,"n1":"杉浦 利男","b1":"<ﾌﾞﾙｰｽｶｲ>","id2":23026,"n2":"半谷 摩利子","b2":""},{"cat":"Ｅミックスダブルス140歳以上","id1":28498,"n1":"奥村 幸年","b1":"","id2":28511,"n2":"伊澤 和加代","b2":"<OZONO>"}];
-const CATS=["Ａ女子120歳以上","Ｃ男子130歳以上","Ｂ女子135歳以上","D男子155歳以上","Ｅミックスダブルス140歳以上"];
+const PAIRS=[{"tab":"女子","cat":"女子100歳以上","id1":30254,"n1":"柴田 典子","b1":"","id2":30247,"n2":"山田 美樹子","b2":""},{"tab":"女子","cat":"女子100歳以上","id1":24871,"n1":"田中 貴美江","b1":"<ｳｲﾝｽﾞＴＣ>","id2":24919,"n2":"筒井 尚子","b2":""},{"tab":"女子","cat":"女子125歳以上","id1":29600,"n1":"後藤 七海","b1":"","id2":29696,"n2":"植木 眞智美","b2":"<尾張旭市ﾃﾆｽ連盟>"},{"tab":"女子","cat":"女子125歳以上","id1":27857,"n1":"秋山 敦子","b1":"","id2":30239,"n2":"松並 佳子","b2":""},{"tab":"女子","cat":"女子125歳以上","id1":27468,"n1":"瀬木 伸子","b1":"","id2":27768,"n2":"高橋 初美","b2":"<幸田ＬＴＣ>"},{"tab":"女子","cat":"女子125歳以上","id1":30141,"n1":"長坂 晶子","b1":"","id2":30140,"n2":"丹羽 裕子","b2":""},{"tab":"女子","cat":"女子125歳以上","id1":20428,"n1":"鈴木 淳子","b1":"<サンダーバニー>","id2":27057,"n2":"梅澤 尚子","b2":"<Ｖ7>"},{"tab":"女子","cat":"女子125歳以上","id1":28377,"n1":"佐田 由理子","b1":"","id2":30565,"n2":"竹本 裕子","b2":""},{"tab":"女子","cat":"女子125歳以上","id1":26756,"n1":"間藤 弥生","b1":"<strawberry>","id2":26769,"n2":"堀田 玲子","b2":"<strawberry>"},{"tab":"女子","cat":"女子135歳以上","id1":14955,"n1":"立松 美津枝","b1":"<名古屋L.T.C.>","id2":27119,"n2":"房崎 律子","b2":"<森林ﾛﾝｸﾞｳｯﾄﾞ>"},{"tab":"女子","cat":"女子135歳以上","id1":16554,"n1":"楠本 佳子","b1":"<ﾜﾝﾀﾞｰＧ>","id2":24987,"n2":"今井 佐知子","b2":""},{"tab":"女子","cat":"女子135歳以上","id1":26578,"n1":"立川 千歌","b1":"","id2":30142,"n2":"小山 和子","b2":""},{"tab":"女子","cat":"女子135歳以上","id1":23047,"n1":"小林 早苗","b1":"","id2":23848,"n2":"青山  世津子","b2":""},{"tab":"女子","cat":"女子135歳以上","id1":30013,"n1":"酒井 淑恵","b1":"<ハートフル>","id2":27913,"n2":"長田 喜久恵","b2":"<森林ﾛﾝｸﾞｳｯﾄﾞ>"},{"tab":"女子","cat":"女子135歳以上","id1":26835,"n1":"水野 奈緒美","b1":"","id2":22307,"n2":"鵜飼 好美","b2":"<ＢＲＡＶＯ>"},{"tab":"女子","cat":"女子135歳以上","id1":24958,"n1":"藤木 真理","b1":"<ｽﾎﾟｯﾄＴ-Ａ>","id2":20131,"n2":"深井 恵子","b2":"<コバリＴＰ>"},{"tab":"女子","cat":"女子135歳以上","id1":23201,"n1":"加藤 敬子","b1":"<ｼﾞｰｸ>","id2":27714,"n2":"小林 久子","b2":"<ジーフ>"},{"tab":"女子","cat":"女子135歳以上","id1":26396,"n1":"阿部 由美子","b1":"<CHENGE>","id2":26179,"n2":"大亀 志津子","b2":""},{"tab":"女子","cat":"女子145歳以上","id1":6794,"n1":"吉次 孝子","b1":"<ｱﾝﾄﾞﾛﾒﾀﾞ>","id2":11431,"n2":"西岡 正子","b2":"<ｴﾒﾗﾙﾄﾞﾞ>"},{"tab":"女子","cat":"女子145歳以上","id1":14357,"n1":"佐藤 朋子","b1":"<OSTT>","id2":29152,"n2":"籐家 桂","b2":""},{"tab":"女子","cat":"女子145歳以上","id1":23468,"n1":"水野 久美子","b1":"","id2":23469,"n2":"梅村 典子","b2":""},{"tab":"女子","cat":"女子145歳以上","id1":23026,"n1":"半谷 摩利子","b1":"","id2":21687,"n2":"北野 とみ子","b2":""},{"tab":"女子","cat":"女子145歳以上","id1":11430,"n1":"伊藤 由美子","b1":"<USLT.C.>","id2":12374,"n2":"田村 千代子","b2":"<名古屋L.T.C.>"},{"tab":"女子","cat":"女子145歳以上","id1":10100,"n1":"清水 幸子","b1":"<マインド>","id2":10072,"n2":"中野 和子","b2":"<オリーブ>"},{"tab":"女子","cat":"女子145歳以上","id1":3960,"n1":"小林 初子","b1":"<名古屋L.T.C.>","id2":15409,"n2":"恒川  勇","b2":"<名古屋L.T.C.>"},{"tab":"男子","cat":"男子120歳以上","id1":28613,"n1":"松尾 孝也","b1":"","id2":29388,"n2":"中村 温利","b2":""},{"tab":"男子","cat":"男子120歳以上","id1":28606,"n1":"大島 敏宏","b1":"","id2":30569,"n2":"30569","b2":""},{"tab":"男子","cat":"男子120歳以上","id1":26194,"n1":"由谷 正巳","b1":"<名古屋テニス協会>","id2":29624,"n2":"下林 直人","b2":""},{"tab":"男子","cat":"男子145歳以上","id1":25032,"n1":"豊田   伸","b1":"<瀬戸庭球倶楽部>","id2":25001,"n2":"青山  茂樹","b2":"<瀬戸庭球倶楽部>"},{"tab":"男子","cat":"男子145歳以上","id1":24030,"n1":"三宅 幸一","b1":"<東海市>","id2":29956,"n2":"澤田 安利","b2":""},{"tab":"男子","cat":"男子145歳以上","id1":18316,"n1":"杉浦 利男","b1":"<ﾌﾞﾙｰｽｶｲ>","id2":24963,"n2":"今原 弘明","b2":"<ﾌﾞﾙｰｽｶｲ>"},{"tab":"男子","cat":"男子135歳以上","id1":27703,"n1":"井﨑 勘治","b1":"","id2":28180,"n2":"竹内 厚人","b2":""},{"tab":"男子","cat":"男子135歳以上","id1":21825,"n1":"小木 卓也","b1":"<ARK47>","id2":27177,"n2":"松原 文善","b2":"<木曽川LTCﾞ>"},{"tab":"男子","cat":"男子135歳以上","id1":27810,"n1":"田中 富士雄","b1":"<ﾌﾚｰﾑｼｮｯﾄ>","id2":26105,"n2":"石川 隆雄","b2":""},{"tab":"男子","cat":"男子135歳以上","id1":25704,"n1":"野口 章一郎","b1":"<豊橋LTC>","id2":29368,"n2":"岡本 与志一","b2":""},{"tab":"男子","cat":"男子135歳以上","id1":27684,"n1":"林 義憲","b1":"<一宮L.T.C.>\r\r","id2":27683,"n2":"杉山 靖","b2":"<一宮L.T.C.>\r\r"},{"tab":"男子","cat":"男子135歳以上","id1":24926,"n1":"山口 勝己","b1":"","id2":27748,"n2":"水野 洋志","b2":""},{"tab":"男子","cat":"男子135歳以上","id1":28582,"n1":"安田 稔","b1":"<ﾌﾞﾗﾝﾀﾞーｽﾃﾆｽ＞","id2":28407,"n2":"中野 弘文","b2":""},{"tab":"男子","cat":"男子155歳以上","id1":21473,"n1":"柳沼 平八","b1":"<青山ｸﾗﾌﾞ>","id2":20968,"n2":"古庄 敏朗","b2":"<東海郵政>"},{"tab":"男子","cat":"男子155歳以上","id1":26418,"n1":"伊藤 立三","b1":"","id2":26417,"n2":"小林 富夫","b2":""},{"tab":"男子","cat":"男子155歳以上","id1":28607,"n1":"伊藤 壽記","b1":"","id2":29703,"n2":"檜垣 一喜","b2":""},{"tab":"男子","cat":"男子155歳以上","id1":19691,"n1":"山西 卓治","b1":"<ﾊﾟｼﾌｨｯｸ>","id2":20153,"n2":"藤田 和由","b2":"<豊橋ｽｰﾊﾟｰﾋｯﾄ>"},{"tab":"男子","cat":"男子155歳以上","id1":28133,"n1":"庄原 哲夫","b1":"<尾張旭市ﾃﾆｽ連盟>","id2":3959,"n2":"小林 廉四郎","b2":"<ゆうゆうクラブ>"},{"tab":"男子","cat":"男子155歳以上","id1":28524,"n1":"辻  秀樹","b1":"","id2":28498,"n2":"奥村 幸年","b2":""},{"tab":"男子","cat":"男子155歳以上","id1":21991,"n1":"丹羽 春穂","b1":"<東海市>","id2":23688,"n2":"吉川 髙志","b2":"<諸の木ＴＣ>"}];
+const TABS=["女子","男子"];
+let activeTab=TABS[0]||'';
 let activeCat='all',searchQ='';
+
 function init(){
-  const row=document.getElementById('filterRow');
-  row.innerHTML=[{label:'すべて',val:'all'},...CATS.map(c=>({label:c,val:c}))].map(c=>
-    `<button class="fchip${c.val==='all'?' active':''}" onclick="setCat('${c.val.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}')">${c.label}</button>`
-  ).join('');
+  // タブが2つ以上ある場合のみタブバーを表示
+  const tb=document.getElementById('tabBar');
+  if(TABS.length>1){
+    tb.innerHTML=TABS.map(t=>
+      `<button class="tab-btn${t===activeTab?' active':''}" data-tab="${t}" onclick="setTab(this.dataset.tab)">${t}</button>`
+    ).join('');
+  }else{
+    tb.style.display='none';
+  }
+  buildCatChips();
   render();
 }
+
+function buildCatChips(){
+  // 現在のタブに属するカテゴリだけをチップに表示
+  const catsInTab=[...new Set(PAIRS.filter(p=>TABS.length<=1||p.tab===activeTab).map(p=>p.cat).filter(Boolean))];
+  const row=document.getElementById('filterRow');
+  row.innerHTML=[{label:'すべて',val:'all'},...catsInTab.map(c=>({label:c,val:c}))].map(c=>
+    `<button class="fchip${c.val==='all'?' active':''}" data-cat="${c.val}" onclick="setCat(this.dataset.cat)">${c.label}</button>`
+  ).join('');
+}
+
+function setTab(t){
+  activeTab=t;
+  activeCat='all';
+  document.querySelectorAll('.tab-btn').forEach(el=>el.classList.toggle('active',el.dataset.tab===t));
+  buildCatChips();
+  render();
+}
+
 function setCat(c){
   activeCat=c;
-  document.querySelectorAll('.fchip').forEach(el=>el.classList.toggle('active',el.textContent.trim()===(c==='all'?'すべて':c)));
+  document.querySelectorAll('.fchip').forEach(el=>el.classList.toggle('active',el.dataset.cat===c));
   render();
 }
+
 function doFilter(){searchQ=document.getElementById('searchInput').value.toLowerCase();render();}
+
 function render(){
   const filtered=PAIRS.filter(p=>{
+    if(TABS.length>1&&p.tab!==activeTab)return false;
     if(activeCat!=='all'&&p.cat!==activeCat)return false;
     if(!searchQ)return true;
     return[p.n1,p.n2,p.b1,p.b2,String(p.id1),String(p.id2)].some(v=>v&&v.toLowerCase().includes(searchQ));
